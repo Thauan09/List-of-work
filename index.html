@@ -2,28 +2,97 @@
 <html>
     <head>
         <title>Lista de tarefas</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+            }
+
+            body {
+                border: 10px solid blue;
+                min-height: 100vh;
+                font-family: Arial, sans-serif;
+                display: flex;
+                flex-direction: column;
+                background: blue;
+            }
+
+            header {
+                color: lightblue;
+                text-transform: uppercase;
+                font-size: 10px;
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            main {
+                flex: auto;
+                background: lightblue;
+                padding: 20px;
+                border-radius: 10px;
+            }
+
+            main ul {
+                padding-top: 5px;
+                list-style: none;
+            }
+
+            main li {
+                border-bottom: 1px solid blue;
+                padding: 5px 0;
+            }
+
+            footer {
+                display: flex;
+                padding-top: 5px;
+            }
+
+            footer input {
+                flex: auto;
+                padding: 5px;
+            }
+        </style>
     </head>
     <body>
-        <h1>Tarefas</h1>
-        <ul>
-            <li>Dever de casa</li>
-            <li>Estudar</li>
-            <li>ler livro</li>
-        </ul>
-        <input>
-        <button onclick="add()">adicionar</button>
+        <header> 
+            <h1>tarefas</h1>
+        </header>
+        <main>
+        <ul></ul>
+        <main>
+        <footer>
+            <input>
+            <button onclick="add()">adicionar</button>
+        </footer>
         <script>
+
+            //estados da aplicação
+            const tarefas = ['Dever de casa', 'Estudar', 'ler livro']
+
+            //alteradores de estado da aplicação
             function add() {
-                const ul = document.querySelector("ul")
                 const input = document.querySelector("input")
                 const tarefa = input.value
-                
-                const li = document.createElement("li")
-                li.innerText = tarefa
-                ul.appendChild(li)
-
+                tarefas.push(tarefa)
                 input.value = ""
+                render()
             }
+            
+            // mostrar estado na tela
+            function render() {
+                const ul = document.querySelector("ul")
+                ul.innerHTML = null 
+
+                tarefas.forEach(function(tarefa){
+                    const li = document.createElement("li")
+                    li.innerText = tarefa
+                    ul.appendChild(li)
+                })
+            }
+
+
+            // iniciar
+            render()
         </script>
     </body>
 
